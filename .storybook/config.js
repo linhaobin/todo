@@ -1,11 +1,12 @@
 import { configure } from '@storybook/react'
 
-const req = require.context('../src/components', true, /\.stories\.tsx?$/)
+const componentsReq = require.context('../src/components', true, /\.stories\.tsx?$/)
+const storiesReq = require.context('../src/stories', true, /\.tsx?$/)
 
 function loadStories() {
-  req.keys().forEach((filename) => req(filename))
+  componentsReq.keys().forEach((filename) => componentsReq(filename))
   
-  require('../src/stories/button.tsx')
+  storiesReq.keys().forEach((filename) => storiesReq(filename))
 }
 
 configure(loadStories, module)

@@ -46,3 +46,32 @@ class MyComponent extends React.PureComponent {
   // ...
 }
 ```
+
+## LinkedStateMixin
+
+```jsx
+import * as React from 'react'
+import * as reactMixin from 'react-mixin'
+import * as LinkedStateMixin from 'react-addons-linked-state-mixin'
+
+@reactMixin.decorate(LinkedStateMixin)
+class TestLinkedState extends React.PureComponent<{}, { msg: string }>
+  implements LinkedStateMixin {
+  linkState: <T>(key: string) => LinkedStateMixin.ReactLink<T>
+
+  state = { msg: '' }
+
+  render() {
+    const { msg } = this.state
+    return (
+      <div>
+        <div>
+          <input valueLink={this.linkState('msg')} />
+        </div>
+        msg: {msg}
+      </div>
+    )
+  }
+}
+
+```

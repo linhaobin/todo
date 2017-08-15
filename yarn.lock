@@ -133,6 +133,12 @@
   version "8.0.22"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.22.tgz#9c6bfee1f45f5e9952ff6b487e657ecca48c7777"
 
+"@types/react-addons-linked-state-mixin@^0.14.18":
+  version "0.14.18"
+  resolved "https://registry.yarnpkg.com/@types/react-addons-linked-state-mixin/-/react-addons-linked-state-mixin-0.14.18.tgz#6977ae59e19aa0ce3a5d7a9e057961aaf1afe959"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@^15.5.2":
   version "15.5.2"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-15.5.2.tgz#f7203c75a1728812355f037ea112611d082555e6"
@@ -143,6 +149,12 @@
 "@types/react-helmet@^5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-5.0.3.tgz#614e706cb73120936c7c067404809f8c2f1a840c"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-mixin@^2.0.30":
+  version "2.0.30"
+  resolved "https://registry.yarnpkg.com/@types/react-mixin/-/react-mixin-2.0.30.tgz#6917d2a603941f8b20ff0953fdc88a31b8633fde"
   dependencies:
     "@types/react" "*"
 
@@ -2742,7 +2754,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.12, fbjs@^0.8.9:
+fbjs@^0.8.12, fbjs@^0.8.4, fbjs@^0.8.9:
   version "0.8.14"
   resolved "http://registry.npm.taobao.org/fbjs/download/fbjs-0.8.14.tgz#d1dbe2be254c35a91e09f31f9cd50a40b2a0ed1c"
   dependencies:
@@ -5577,6 +5589,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-linked-state-mixin@^15.6.0:
+  version "15.6.0"
+  resolved "http://registry.npm.taobao.org/react-addons-linked-state-mixin/download/react-addons-linked-state-mixin-15.6.0.tgz#fa468b67670cfd8fe053f59c452b347aecd449e7"
+  dependencies:
+    fbjs "^0.8.4"
+    object-assign "^4.1.0"
+
 react-dev-utils@^3.0.1, react-dev-utils@^3.1.0:
   version "3.1.1"
   resolved "http://registry.npm.taobao.org/react-dev-utils/download/react-dev-utils-3.1.1.tgz#09ae7209a81384248db56547e718e65bd3b20eb5"
@@ -5690,6 +5709,13 @@ react-komposer@^2.0.0:
     lodash.pick "^4.4.0"
     react-stubber "^1.0.0"
     shallowequal "^0.2.2"
+
+react-mixin@^3.1.0:
+  version "3.1.0"
+  resolved "http://registry.npm.taobao.org/react-mixin/download/react-mixin-3.1.0.tgz#0c5dea2ee90d01455dabfbebe44db03a37497e53"
+  dependencies:
+    object-assign "^4.0.1"
+    smart-mixin "^2.0.0"
 
 react-modal@^1.7.7:
   version "1.9.7"
@@ -6319,6 +6345,10 @@ slice-ansi@0.0.4:
 slide@^1.1.5:
   version "1.1.6"
   resolved "http://registry.npm.taobao.org/slide/download/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
+
+smart-mixin@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/smart-mixin/download/smart-mixin-2.0.0.tgz#a34a1055e32a75b30d2b4e3ca323dc99cb53f437"
 
 sntp@1.x.x:
   version "1.0.9"
