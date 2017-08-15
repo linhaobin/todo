@@ -5,7 +5,7 @@ export interface Props {
   enthusiasmLevel?: number
 }
 
-export default class Hello extends React.Component<Props, object> {
+export default class Hello extends React.PureComponent<Props, object> {
   render() {
     const { name, enthusiasmLevel = 1 } = this.props
 

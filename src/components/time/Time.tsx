@@ -9,15 +9,15 @@ export interface State {
   time: number
 }
 
-export default class Time extends React.Component<Props, State> {
+export default class Time extends React.PureComponent<Props, State> {
   static defaultProps = {
     time: 0
   }
 
   intervalId: number
 
-  constructor(props: Props) {
-    super(props)
+  constructor(props: Props, context?: {}) {
+    super(props, context)
 
     this.state = {
       time: props.time || Time.defaultProps.time
@@ -29,7 +29,7 @@ export default class Time extends React.Component<Props, State> {
   start() {
     this.intervalId = window.setInterval(() => {
       this.setState(prevState => ({
-        time: prevState.time + 1
+        time: prevState.time
       }))
     }, 1000)
   }
@@ -61,6 +61,7 @@ export default class Time extends React.Component<Props, State> {
   }
 
   render() {
+    console.log('render')
     const { time } = this.state
 
     return (

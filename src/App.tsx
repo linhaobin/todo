@@ -8,7 +8,7 @@ import Time from './components/time/Time'
 
 const logo = require('./logo.svg')
 
-class App extends React.Component {
+class App extends React.PureComponent {
   render() {
     return (
       <div className="App">

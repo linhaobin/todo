@@ -14,7 +14,7 @@ create-react-app todo --scripts-version=react-scripts-ts
 import React from "react";
 import {Helmet} from "react-helmet";
 
-class Application extends React.Component {
+class Application extends React.PureComponent {
   render () {
     return (
         <div className="application">
@@ -38,3 +38,11 @@ class Application extends React.Component {
 > UI组件调试开发
   [github](https://github.com/storybooks/storybook)
   [文档](https://storybook.js.org/basics/introduction/)
+
+## React.PureComponent
+```jsx
+
+class MyComponent extends React.PureComponent {
+  // ...
+}
+```
