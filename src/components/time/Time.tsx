@@ -20,7 +20,7 @@ export default class Time extends React.Component<Props, State> {
     super(props)
 
     this.state = {
-      time: props.time
+      time: props.time || Time.defaultProps.time
     }
 
     this.reset = this.reset.bind(this)
