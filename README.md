@@ -33,3 +33,8 @@ class Application extends React.Component {
 ## prettier
 > 格式化代码，自动修改代码，commit前修改
   [github](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically)
+
+## storybook
+> UI组件调试开发
+  [github](https://github.com/storybooks/storybook)
+  [文档](https://storybook.js.org/basics/introduction/)

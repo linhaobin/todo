@@ -2,6 +2,7 @@ import * as React from 'react'
 
 export interface Props {
   time?: number
+  onChange?: (time: number) => void
 }
 
 export interface State {
@@ -9,26 +10,23 @@ export interface State {
 }
 
 export default class Time extends React.Component<Props, State> {
+  static defaultProps = {
+    time: 0
+  }
+
   intervalId: number
 
   constructor(props: Props) {
     super(props)
 
     this.state = {
-      time: props.time || 0
+      time: props.time
     }
+
+    this.reset = this.reset.bind(this)
   }
 
-  render() {
-    const { time } = this.state
-    return (
-      <h1>
-        time: {time}
-      </h1>
-    )
-  }
-
-  componentDidMount() {
+  start() {
     this.intervalId = window.setInterval(() => {
       this.setState(prevState => ({
         time: prevState.time + 1
@@ -36,7 +34,39 @@ export default class Time extends React.Component<Props, State> {
     }, 1000)
   }
 
+  stop() {
+    this.intervalId && clearInterval(this.intervalId)
+  }
+
+  reset() {
+    this.stop()
+    this.setState(() => ({
+      time: 0
+    }))
+    this.start()
+  }
+
+  componentDidMount() {
+    this.start()
+  }
+
   componentWillUnmount() {
-    clearInterval(this.intervalId)
+    this.stop()
+  }
+
+  componentWillUpdate(nextProps: Props, nextState: State) {
+    if (nextState.time !== this.state.time) {
+      this.props.onChange && this.props.onChange(this.state.time)
+    }
+  }
+
+  render() {
+    const { time } = this.state
+
+    return (
+      <h1 onClick={this.reset}>
+        time: {time}
+      </h1>
+    )
   }
 }
