@@ -1,2 +1,2 @@
 # todo
-react
+typescript,react,react-router,react-redux
