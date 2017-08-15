@@ -1,6 +1,10 @@
 import * as React from 'react'
+// style
 import './App.css'
+// components
 import { Helmet } from 'react-helmet'
+import Hello from './components/hello/Hello'
+import Time from './components/time/Time'
 
 const logo = require('./logo.svg')
 
@@ -18,6 +22,17 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <Hello name="HBin" />
+        <Hello
+          name="HBin"
+          enthusiasmLevel={Math.floor(Math.random() * 10) + 1}
+        />
+
+        <Time />
+
+        {Array.from({ length: 10 }).map((_, i) =>
+          <Time key={i} time={Math.floor(Math.random() * 100) + 1} />
+        )}
       </div>
     )
   }
