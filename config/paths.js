@@ -5,7 +5,7 @@ const utils = require('./utils')
 
 module.exports = {
   dist: utils.resolve('dist'),
-  appJs: utils.resolve('src/index.tsx'),
+  appJs: utils.resolve('src/client/index.tsx'),
   appHtml: utils.resolve('public/index.html'),
   public: './public'
   // appBuild: resolveApp('build'),

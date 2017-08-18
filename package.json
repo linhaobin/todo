@@ -17,13 +17,10 @@
     ]
   },
   "scripts": {
+    "start": "npm run dev:server",
     "prettier": "prettier --single-quote --semi false --write \"src/**/*.{js,jsx,ts,tsx,json,css}\"",
     "precommit": "lint-staged",
     "dev:server": "cross-env NODE_ENV=development node config/dev-server.js",
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject",
     "storybook": "start-storybook -p 9001"
   },
   "devDependencies": {
