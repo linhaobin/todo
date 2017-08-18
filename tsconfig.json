@@ -20,11 +20,12 @@
   },
   "exclude": [
     "node_modules",
+    "config",
     "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
-  ]
+    "dist",
+    "jest"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useCache": true
+  }
 }

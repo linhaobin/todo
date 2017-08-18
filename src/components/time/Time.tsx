@@ -29,7 +29,7 @@ export default class Time extends React.PureComponent<Props, State> {
   start() {
     this.intervalId = window.setInterval(() => {
       this.setState(prevState => ({
-        time: prevState.time
+        time: prevState.time + 1
       }))
     }, 1000)
   }
@@ -61,7 +61,6 @@ export default class Time extends React.PureComponent<Props, State> {
   }
 
   render() {
-    console.log('render')
     const { time } = this.state
 
     return (
