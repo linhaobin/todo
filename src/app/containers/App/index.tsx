@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet'
 import Home from '../Home'
 import About from '../About'
 
-const logo = require('./assets/logo.svg')
+const logo: string = require('./assets/logo.svg')
 
 class App extends React.PureComponent {
   render() {

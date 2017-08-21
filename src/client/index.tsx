@@ -5,10 +5,13 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker'
 // import './index.css'
 
+import App from '../app/containers/App'
+
 const rootNode = document.getElementById('root')
 
 const renderApp = () => {
-  const App = require('../app/containers/App').default
+  // TODO
+  // const App = (require('../app/containers/App') as {default: React.Component}).default
 
   render(
     <AppContainer>

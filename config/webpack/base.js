@@ -20,7 +20,8 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.tsx?$/,
-        loader: 'tslint-loader'
+        exclude: /node_modules/,
+        loader: 'tslint-loader',
       },
       // TODO
       // {
@@ -29,8 +30,9 @@ module.exports = {
       // },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: [
-          'style-loader',
+          // 'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -44,6 +46,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        exclude: /node_modules/,
         loader: 'url-loader',
         options: {
           limit: 10000,
@@ -52,6 +55,7 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        exclude: /node_modules/,
         loader: 'url-loader',
         options: {
           limit: 10000,

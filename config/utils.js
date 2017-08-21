@@ -1,6 +1,8 @@
 const path = require('path')
 
-const resolve = relativePath => path.join(__dirname, '../', relativePath)
+const resolve = relativePath => {
+  return path.join(__dirname, '../', relativePath)
+}
 
 module.exports = {
   resolve

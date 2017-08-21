@@ -24,8 +24,7 @@ module.exports = merge(baseConfig, {
     // Next line is not used in dev but WebpackDevServer crashes without it:
     path: paths.dist,
     filename: '[name].js',
-    // This is the URL that app is served from. We use "/" in development.
-    publicPath: publicPath,
+    publicPath: paths.publicPath,
     pathinfo: true
   },
   module: {
@@ -33,7 +32,7 @@ module.exports = merge(baseConfig, {
       {
         test: /\.tsx?$/,
         use: [
-          // { loader: 'react-hot-loader/webpack' },
+          { loader: 'react-hot-loader/webpack' },
           { loader: 'awesome-typescript-loader' }
         ]
       }

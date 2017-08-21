@@ -7,7 +7,8 @@ module.exports = {
   dist: utils.resolve('dist'),
   appJs: utils.resolve('src/client/index.tsx'),
   appHtml: utils.resolve('public/index.html'),
-  public: './public'
+  public: './public',
+  publicPath: '/',
   // appBuild: resolveApp('build'),
   // appPublic: resolveApp('public'),
   // appIndexJs: resolveApp('src/index.tsx'),
