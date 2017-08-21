@@ -1,17 +1,17 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, RouteComponentProps } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker'
 // import './index.css'
-
-import App from '../app/containers/App'
 
 const rootNode = document.getElementById('root')
 
 const renderApp = () => {
   // TODO
-  // const App = (require('../app/containers/App') as {default: React.Component}).default
+  const App = (require('../app/containers/App') as {
+    default: React.ComponentType<RouteComponentProps<{}>>
+  }).default
 
   render(
     <AppContainer>
