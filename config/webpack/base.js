@@ -2,15 +2,12 @@ const path = require('path')
 const webpack = require('webpack')
 // const ManifestPlugin = require('webpack-manifest-plugin')
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin
-const paths = require('../paths')
 const utils = require('../utils')
 
 const publicPath = '/'
 
 module.exports = {
-  entry: {
-    app: paths.appJs
-  },
+  context: utils.resolve('.'),
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     modules: [utils.resolve('src'), utils.resolve('node_modules')]
@@ -65,6 +62,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CheckerPlugin()
+    new CheckerPlugin(),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ]
 }

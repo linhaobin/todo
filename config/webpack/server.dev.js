@@ -16,7 +16,8 @@ fs
     nodeModules[mod] = 'commonjs ' + mod
   })
 
-const config = merge(baseConfig, {
+const config = merge({}, baseConfig, {
+  name: 'server',
   externals: nodeModules,
   target: 'node',
 
@@ -36,7 +37,8 @@ const config = merge(baseConfig, {
     rules: [
       {
         test: /\.tsx?$/,
-        use: [{ loader: 'awesome-typescript-loader' }]
+        use: [{ loader: 'awesome-typescript-loader' }],
+        exclude: /node_modules/,
       }
     ]
   },
@@ -49,6 +51,19 @@ const config = merge(baseConfig, {
     __filename: false,
     __dirname: false,
   },
+
+  plugins: [
+
+    new webpack.DefinePlugin({
+      'process.env': {
+        BROWSER: JSON.stringify(false),
+        NODE_ENV: JSON.stringify('development')
+      }
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
+  ]
 })
 
 module.exports = config

@@ -8,7 +8,6 @@ import registerServiceWorker from './registerServiceWorker'
 const rootNode = document.getElementById('root')
 
 const renderApp = () => {
-  // TODO
   const App = (require('../app/containers/App') as {
     default: React.ComponentType<RouteComponentProps<{}>>
   }).default
@@ -28,11 +27,11 @@ renderApp()
 // Enable hot reload by react-hot-loader
 if (module.hot) {
   module.hot.accept('../app/containers/App', () => {
-    setImmediate(() => {
-      // Preventing the hot reloading error from react-router
-      // unmountComponentAtNode(mountNode)
-      renderApp()
-    })
+    // setImmediate(() => {
+    // Preventing the hot reloading error from react-router
+    // unmountComponentAtNode(mountNode)
+    renderApp()
+    // })
   })
 }
 

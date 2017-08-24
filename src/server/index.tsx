@@ -1,45 +1,20 @@
-import * as path from 'path'
 import * as express from 'express'
-import * as compression from 'compression'
 import * as helmet from 'helmet'
-import * as favicon from 'serve-favicon'
 import * as React from 'react'
-import * as webpack from 'webpack'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
-import { StaticRouter } from 'react-router-dom'
-import * as webpackDevMiddleware from 'webpack-dev-middleware'
-import * as webpackHotMiddleware from 'webpack-dev-middleware'
+import { Route, StaticRouter } from 'react-router-dom'
 
-import * as webpackConfig from '../../config/webpack/client.dev'
 import Html from './Html'
 import App from '../app/containers/App'
 
-const app = express()
+interface MyApp extends express.Express {
+  hot?: __WebpackModuleApi.Hot
+}
 
-// export default function(parameters: {}) {
-// console.log(parameters)
+const app: MyApp = express()
+
 // Using helmet to secure Express with various HTTP headers
 app.use(helmet())
-// Compress all requests
-app.use(compression())
-
-app.use(favicon(path.join(process.cwd(), './public/favicon.ico')))
-app.use(express.static(path.join(process.cwd(), './build/public')))
-
-// Run express as webpack dev server
-const compiler = webpack(webpackConfig)
-
-const devMiddleware = webpackDevMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  quiet: true
-  // noInfo: true,
-  // stats: 'errors-only'
-})
-
-const hotMiddleware = webpackHotMiddleware(compiler)
-
-app.use(devMiddleware)
-app.use(hotMiddleware)
 
 // Register server-side rendering middleware
 app.get('*', (req, res) => {
@@ -57,7 +32,7 @@ app.get('*', (req, res) => {
     const routerContext: { url?: string; status?: string } = {}
     const htmlContent = renderToString(
       <StaticRouter location={req.url} context={routerContext}>
-        <App />
+        <Route path="/" component={App} />
       </StaticRouter>
     )
 
@@ -82,5 +57,35 @@ app.get('*', (req, res) => {
   }
 })
 
-app.listen(3000)
+app.use(
+  ((err: { status: number }, req, res, next) => {
+    console.error(err)
+
+    const status = err.status || 500
+    res.status(status)
+    res.send(`<!doctype html>${status}`)
+  }) as express.ErrorRequestHandler
+)
+
+// 不清楚什么用的
+// Launch the server
+// -----------------------------------------------------------------------------
+// const promise = models.sync().catch(err => console.error(err.stack))
+// if (!module.hot) {
+//   promise.then(() => {
+//     app.listen(3000, () => {
+//       console.info(`The server is running at http://localhost:${3000}/`)
+//     })
+//   })
 // }
+
+//
+// Hot Module Replacement
+// -----------------------------------------------------------------------------
+
+if (module.hot) {
+  app.hot = module.hot
+  // module.hot.accept('../app/containers/App')
+}
+
+export default app

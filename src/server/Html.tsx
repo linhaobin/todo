@@ -17,12 +17,10 @@ export default class Html extends React.Component<Props, {}> {
       <html {...rest} lang={lang}>
         <head>
           <meta charSet="utf-8" />
-          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <link rel="apple-touch-icon" href="apple-touch-icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
 
           {head.title.toComponent()}
@@ -47,7 +45,7 @@ export default class Html extends React.Component<Props, {}> {
           />
           {head.script.toComponent()}
 
-          {['app.js'].map((src: string, i: number) =>
+          {['/app.js'].map((src: string, i: number) =>
             <script src={src} key={i} />
           )}
         </body>

@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 // const ManifestPlugin = require('webpack-manifest-plugin')
 
@@ -11,13 +10,14 @@ const utils = require('../utils')
 
 const publicPath = '/'
 
-module.exports = merge(baseConfig, {
+module.exports = merge({}, baseConfig, {
+  name: 'client',
   devtool: 'cheap-module-eval-source-map',
   entry: {
     app: [
-      'webpack-hot-middleware/client',
       'react-hot-loader/patch',
-      baseConfig.entry.app
+      'webpack-hot-middleware/client',
+      paths.appJs
     ]
   },
   output: {
@@ -41,11 +41,6 @@ module.exports = merge(baseConfig, {
   plugins: [
     // In development, this will be an empty string.
     // new InterpolateHtmlPlugin(env.raw),
-    // Generates an `index.html` file with the <script> injected.
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml
-    }),
 
     // new ManifestPlugin({
     //   fileName: '../manifest.json'
@@ -59,7 +54,7 @@ module.exports = merge(baseConfig, {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.NamedModulesPlugin(),
     new FriendlyErrorsPlugin()
   ]
 })
