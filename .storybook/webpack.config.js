@@ -1,9 +1,12 @@
 const path = require('path')
+const merge = require('webpack-merge')
 
-// const webpackConfig = require('../config/webpack/webpack.config.dev')
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin
+const baseConfig = require('../config/webpack/base')
 
-module.exports = {
+const myBaseConfig = Object.assign({}, baseConfig)
+delete myBaseConfig.resolve
+
+module.exports = merge({}, myBaseConfig, {
   resolve: {
     extensions: ['.js', 'jsx', '.ts', '.tsx', '.json']
   },
@@ -12,8 +15,5 @@ module.exports = {
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       { test: /\.tsx?$/, loader: 'awesome-typescript-loader' }
     ]
-  },
-  plugins: [
-    new CheckerPlugin()
-  ]
-}
+  }
+})
