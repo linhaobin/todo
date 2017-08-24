@@ -1,6 +1,6 @@
 import * as React from 'react'
-import * as reactMixin from 'react-mixin'
-import * as LinkedStateMixin from 'react-addons-linked-state-mixin'
+// import * as reactMixin from 'react-mixin'
+// import * as LinkedStateMixin from 'react-addons-linked-state-mixin'
 import { storiesOf } from '@storybook/react'
 // import { action } from '@storybook/addon-actions'
 
@@ -30,10 +30,9 @@ storiesOf('Input', module)
     return <InputTest />
   })
   .add('linkedState', () => {
-    @reactMixin.decorate(LinkedStateMixin)
-    class TestLinkedState extends React.PureComponent<{}, { msg: string }>
-      implements LinkedStateMixin {
-      linkState: <T>(key: string) => LinkedStateMixin.ReactLink<T>
+    // @reactMixin.decorate(LinkedStateMixin)
+    class TestLinkedState extends React.PureComponent<{}, { msg: string }> {
+      // linkState: <T>(key: string) => LinkedStateMixin.ReactLink<T>
 
       state = { msg: '' }
 
@@ -41,9 +40,7 @@ storiesOf('Input', module)
         const { msg } = this.state
         return (
           <div>
-            <div>
-              <input valueLink={this.linkState('msg')} />
-            </div>
+            <div>{/* <input valueLink={this.linkState('msg')} /> */}</div>
             msg: {msg}
           </div>
         )
