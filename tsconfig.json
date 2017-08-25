@@ -18,9 +18,9 @@
   },
   "exclude": [
     "node_modules",
-    "build",
     "dist",
-    "jest"
+    "jest",
+    "config"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useCache": true
