@@ -18,7 +18,7 @@ fs
 
 module.exports = merge(
   getBaseConfig({
-    isClient: true,
+    isClient: false,
     isDev: true
   }),
   {
