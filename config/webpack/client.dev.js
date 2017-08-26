@@ -4,15 +4,18 @@ const merge = require('webpack-merge')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 // const ManifestPlugin = require('webpack-manifest-plugin')
 
-const baseConfig = require('./base')
+const getBaseConfig = require('./base')
 const paths = require('../paths')
 const utils = require('../utils')
 
-const publicPath = '/'
-
-module.exports = merge({}, baseConfig, {
+module.exports = merge(getBaseConfig({
+  isClient: true,
+  isDev: true
+}), {
   name: 'client',
+
   devtool: 'cheap-module-eval-source-map',
+
   entry: {
     app: [
       'react-hot-loader/patch',
@@ -20,6 +23,7 @@ module.exports = merge({}, baseConfig, {
       paths.appJs
     ]
   },
+
   output: {
     // Next line is not used in dev but WebpackDevServer crashes without it:
     path: paths.dist,
@@ -27,17 +31,7 @@ module.exports = merge({}, baseConfig, {
     publicPath: paths.publicPath,
     pathinfo: true
   },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: [
-          { loader: 'react-hot-loader/webpack' },
-          { loader: 'awesome-typescript-loader' }
-        ]
-      }
-    ]
-  },
+
   plugins: [
     // In development, this will be an empty string.
     // new InterpolateHtmlPlugin(env.raw),

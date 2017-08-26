@@ -3,7 +3,7 @@ const fs = require('fs')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 
-const baseConfig = require('./base')
+const getBaseConfig = require('./base')
 const paths = require('../paths')
 
 const nodeModules = {}
@@ -16,54 +16,49 @@ fs
     nodeModules[mod] = 'commonjs ' + mod
   })
 
-const config = merge({}, baseConfig, {
-  name: 'server',
-  externals: nodeModules,
-  target: 'node',
+module.exports = merge(
+  getBaseConfig({
+    isClient: true,
+    isDev: true
+  }),
+  {
+    name: 'server',
 
-  entry: {
-    server: ['./src/server/index.tsx']
-  },
+    externals: nodeModules,
 
-  output: {
-    // Next line is not used in dev but WebpackDevServer crashes without it:
-    path: paths.dist,
-    filename: '[name].js',
-    publicPath: paths.publicPath,
-    libraryTarget: 'commonjs2'
-  },
+    target: 'node',
 
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: [{ loader: 'awesome-typescript-loader' }],
-        exclude: /node_modules/,
-      }
+    entry: {
+      server: ['./src/server/index.tsx']
+    },
+
+    output: {
+      // Next line is not used in dev but WebpackDevServer crashes without it:
+      path: paths.dist,
+      filename: '[name].js',
+      publicPath: paths.publicPath,
+      libraryTarget: 'commonjs2'
+    },
+
+    node: {
+      console: false,
+      global: false,
+      process: false,
+      Buffer: false,
+      __filename: false,
+      __dirname: false
+    },
+
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          BROWSER: JSON.stringify(false),
+          NODE_ENV: JSON.stringify('development')
+        }
+      }),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
+      new webpack.NamedModulesPlugin()
     ]
-  },
-
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false,
-  },
-
-  plugins: [
-
-    new webpack.DefinePlugin({
-      'process.env': {
-        BROWSER: JSON.stringify(false),
-        NODE_ENV: JSON.stringify('development')
-      }
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
-  ]
-})
-
-module.exports = config
+  }
+)
