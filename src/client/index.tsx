@@ -1,9 +1,17 @@
 import * as React from 'react'
-import { render } from 'react-dom'
+import * as ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter, Route, RouteComponentProps } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker'
 // import './index.css'
+
+// TODO
+declare module 'react-dom' {
+  function hydrate<P>(
+    element: React.ReactElement<P>,
+    container: Element | null
+  ): void
+}
 
 const rootNode = document.getElementById('root')
 
@@ -12,7 +20,7 @@ const renderApp = () => {
     default: React.ComponentType<RouteComponentProps<{}>>
   }).default
 
-  render(
+  ReactDOM.hydrate(
     <AppContainer>
       <BrowserRouter>
         <Route path="/" component={App} />

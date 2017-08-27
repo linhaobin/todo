@@ -3,12 +3,12 @@ import Helmet from 'react-helmet'
 
 type Props = {
   htmlContent: string
-  manifest: string[]
+  scripts: string[]
 }
 
 export default class Html extends React.Component<Props, {}> {
   render() {
-    const { htmlContent } = this.props
+    const { htmlContent, scripts } = this.props
     // Should be declared after "renderToStaticMarkup()" of "../server.js" or it won't work
     const head = Helmet.renderStatic()
     const attrs = head.htmlAttributes.toComponent()
@@ -43,11 +43,10 @@ export default class Html extends React.Component<Props, {}> {
               __html: `window.__INITIAL_STATE__=${JSON.stringify('')};`
             }}
           />
-          {head.script.toComponent()}
-
-          {['/app.js'].map((src: string, i: number) =>
+          {scripts.map((src: string, i: number) =>
             <script src={src} key={i} />
           )}
+          {head.script.toComponent()}
         </body>
       </html>
     )

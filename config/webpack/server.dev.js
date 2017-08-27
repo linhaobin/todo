@@ -2,31 +2,27 @@ const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const nodeExternals = require('webpack-node-externals')
 
-const getBaseConfig = require('./base')
+const baseConfig = require('./base')
 const paths = require('../paths')
 
-const nodeModules = {}
-fs
-  .readdirSync('node_modules')
-  .filter(x => {
-    return ['.bin'].indexOf(x) === -1
-  })
-  .forEach(mod => {
-    nodeModules[mod] = 'commonjs ' + mod
-  })
-
 module.exports = merge(
-  getBaseConfig({
+  baseConfig.getConfig({
     isClient: false,
     isDev: true
   }),
   {
     name: 'server',
 
-    externals: nodeModules,
-
     target: 'node',
+
+    externals: [
+      './assets.json',
+      nodeExternals({
+        whitelist: [baseConfig.styleTest, baseConfig.imageTest],
+      }),
+    ],
 
     entry: {
       server: ['./src/server/index.tsx']

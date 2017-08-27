@@ -15,15 +15,12 @@ export default class Home extends React.PureComponent {
         <h1>Home</h1>
 
         <Hello name="HBin" />
-        <Hello
-          name="HBin"
-          enthusiasmLevel={Math.floor(Math.random() * 10) + 1}
-        />
+        <Hello name="HBin" enthusiasmLevel={Math.floor(10) + 1} />
 
         <Time />
 
         {Array.from({ length: 10 }).map((_, i) =>
-          <Time key={i} time={Math.floor(Math.random() * 100) + 1} />
+          <Time key={i} time={Math.floor(i) + 1} />
         )}
       </div>
     )

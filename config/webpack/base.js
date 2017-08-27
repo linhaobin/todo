@@ -4,10 +4,13 @@ const webpack = require('webpack')
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin
 const resolve = require('../utils/resolve')
 
-module.exports = function getBaseConfig(options) {
-  options = Object.assign({},options)
+const styleTest = /\.css$/
+const imageTest = /\.(png|jpe?g|gif|svg)(\?.*)?$/
 
-  const {isClient, isDev} = options
+function getConfig(options) {
+  options = Object.assign({}, options)
+
+  const { isClient, isDev } = options
 
   return {
     context: resolve('.'),
@@ -21,13 +24,13 @@ module.exports = function getBaseConfig(options) {
           enforce: 'pre',
           test: /\.tsx?$/,
           exclude: /node_modules/,
-          loader: 'tslint-loader',
+          loader: 'tslint-loader'
         },
         (() => {
           const loaders = []
 
           // 浏览器端，dev模式下
-          if(isClient && isDev){
+          if (isClient && isDev) {
             loaders.push({ loader: 'react-hot-loader/webpack' })
           }
           loaders.push({ loader: 'awesome-typescript-loader' })
@@ -38,7 +41,7 @@ module.exports = function getBaseConfig(options) {
           }
         })(),
         {
-          test: /\.css$/,
+          test: styleTest,
           exclude: /node_modules/,
           use: [
             // 'style-loader',
@@ -54,7 +57,7 @@ module.exports = function getBaseConfig(options) {
           ]
         },
         {
-          test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+          test: imageTest,
           exclude: /node_modules/,
           loader: 'url-loader',
           options: {
@@ -75,7 +78,14 @@ module.exports = function getBaseConfig(options) {
     },
     plugins: [
       new CheckerPlugin(),
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      // new ManifestPlugin(),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ]
   }
+}
+
+module.exports = {
+  styleTest,
+  imageTest,
+  getConfig
 }

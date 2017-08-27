@@ -7,6 +7,11 @@ import { Route, StaticRouter } from 'react-router-dom'
 import Html from './Html'
 import App from '../app/containers/App'
 
+type assets = {
+  [module: string]: { js: string }
+}
+const assets: assets = require('./assets.json')
+
 interface MyApp extends express.Express {
   hot?: __WebpackModuleApi.Hot
 }
@@ -19,9 +24,12 @@ app.use(helmet())
 // Register server-side rendering middleware
 app.get('*', (req, res) => {
   const renderHtml = (htmlContent: string = '') => {
-    const html = renderToStaticMarkup(
-      <Html htmlContent={htmlContent} manifest={[]} />
-    )
+    const data = {
+      htmlContent,
+      scripts: [assets.app.js]
+    }
+
+    const html = renderToStaticMarkup(<Html {...data} />)
 
     return `<!doctype html>${html}`
   }
