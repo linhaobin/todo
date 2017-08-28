@@ -4,7 +4,6 @@ const browserSync = require('browser-sync')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
-const createLaunchEditorMiddleware = require('react-error-overlay/middleware')
 const rimraf = require('rimraf')
 
 const clientWebpackConfig = require('./webpack/client.dev')
@@ -34,7 +33,6 @@ let server = null
 async function start() {
   if (server) return server
   server = express()
-  server.use(createLaunchEditorMiddleware())
   server.use(express.static(path.resolve('public')))
 
   // Configure compilation
